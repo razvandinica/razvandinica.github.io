@@ -1,2 +1,1 @@
-# razvandinica.github.io
-Boo !!!
+Băăă, ce cauți aici !?!
