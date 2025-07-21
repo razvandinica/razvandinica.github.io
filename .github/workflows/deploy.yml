@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch: # This line allows manual triggering
 
 permissions:
   contents: write
