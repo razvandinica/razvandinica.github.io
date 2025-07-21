@@ -33,3 +33,6 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
           -H "Content-Type: application/json" \
           --data '{"purge_everything":true}'
+
+      - name: Create .nojekyll file
+        run: touch out/.nojekyll
