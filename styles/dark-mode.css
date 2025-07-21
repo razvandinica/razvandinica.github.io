@@ -1,0 +1,42 @@
+html,
+body {
+  height: 100%;
+}
+
+body.dark-mode {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+body.dark-mode .navbar {
+  background-color: #212529 !important;
+  border-color: #343a40 !important;
+}
+
+body.dark-mode .navbar-brand,
+body.dark-mode .nav-link {
+  color: #f8f9fa !important;
+}
+
+body.dark-mode .list-group-item {
+  background-color: #495057;
+  color: #f8f9fa;
+  border-color: #6c757d;
+}
+
+body.dark-mode .list-group-item-action:hover {
+  background-color: #6c757d;
+}
+
+body.dark-mode .text-muted {
+  color: #adb5bd !important; /* A lighter gray for better contrast */
+}
+
+body.dark-mode .footer {
+  background-color: #212529 !important;
+  border-color: #343a40 !important;
+}
+
+body.dark-mode .footer .text-muted {
+  color: #f8f9fa !important;
+}
