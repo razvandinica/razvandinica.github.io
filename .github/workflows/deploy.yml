@@ -26,3 +26,10 @@ jobs:
         with:
           branch: gh-pages
           folder: out
+
+      - name: Purge Cloudflare Cache
+        uses: cloudflare/purge-cache-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          zoneId: ${{ secrets.CF_ZONE_ID }}
+          purgeEverything: true
