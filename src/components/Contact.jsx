@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Contact = () => {
-    return (
-        <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-            <h1>Contact</h1>
-            <p>This is the contact page.</p>
-            <Link to="/" className="btn btn-primary mt-3">Back to Home</Link>
-        </div>
-    );
+  useDocumentTitle('Contact | Razvan Dinica');
+  return (
+    <div>
+      <h1>Contact</h1>
+      <p>This is the contact page.</p>
+    </div>
+  );
 };
 
 export default Contact;

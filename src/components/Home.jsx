@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Home = () => {
-    return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            <Link to="/aboutme" className="btn btn-primary mx-2">About Me</Link>
-            <Link to="/blog" className="btn btn-secondary mx-2">Blog</Link>
-            <Link to="/contact" className="btn btn-info mx-2">Contact</Link>
-        </div>
-    );
+  useDocumentTitle('Home | Razvan Dinica');
+  return (
+    <div className="text-center">
+      <h1>Welcome to my Website</h1>
+      <p>Navigate using the links in the header.</p>
+    </div>
+  );
 };
 
 export default Home;
