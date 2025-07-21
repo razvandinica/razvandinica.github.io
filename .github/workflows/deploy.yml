@@ -28,8 +28,8 @@ jobs:
           folder: out
 
       - name: Purge Cloudflare Cache
-        uses: cloudflare/cache-purge-action@v1
+        uses: cloudflare/cache-purge-action@v3.1.0
         with:
-          cf_auth: ${{ secrets.CF_API_TOKEN }}
           cf_zone: ${{ secrets.CF_ZONE_ID }}
+          cf_auth: ${{ secrets.CF_API_TOKEN }}
           purge_everything: true
