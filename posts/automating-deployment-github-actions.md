@@ -1,6 +1,6 @@
 ---
 title: "From Code to Cloud: Automating My Blog's Deployment with GitHub Actions"
-date: '2025-07-22'
+date: '2025-06-22'
 tags: ['GitHub Actions', 'CI/CD', 'Automation', 'Deployment', 'Cloudflare']
 ---
 

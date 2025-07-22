@@ -1,6 +1,6 @@
 ---
 title: "Why I Chose a Static Site (and Next.js) for My Personal Blog"
-date: '2025-07-22'
+date: '2025-04-17'
 tags: ['Next.js', 'Jamstack', 'Web Development', 'Architecture']
 ---
 

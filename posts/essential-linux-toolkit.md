@@ -1,6 +1,6 @@
 ---
 title: "My Essential Linux Toolkit for Web Development"
-date: '2025-07-22'
+date: '2025-05-11'
 tags: ['Linux', 'CLI', 'Productivity', 'Web Development', 'Tools']
 ---
 
