@@ -1,1 +1,0 @@
-{"pageProps":{"postData":{"slug":"first-post","content":"<p>This is the <strong>content</strong> of my first Markdown blog post.</p>\n<p>It supports <em>Markdown</em> syntax.</p>\n<pre><code class=\"language-javascript\">console.log(\"Hello, Markdown!\");\n</code></pre>\n","title":"My First Markdown Post","date":"2025-07-21","author":"Razvan Dinica"}},"__N_SSG":true}
