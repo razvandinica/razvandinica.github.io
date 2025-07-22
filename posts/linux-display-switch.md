@@ -1,7 +1,8 @@
 ---
 title: Efficient Display Switching on Linux for Multi-Computer Setups
-date: 2025-07-21
+date: 2025-05-20
 author: Razvan Dinica
+tags: ['Linux', 'ddcutil', 'KVM', 'Productivity']
 ---
 
 In many modern workspaces, it's common to find a single monitor serving multiple computers. This setup is often driven by practical needs: optimizing limited desk space, reducing hardware costs, or managing distinct work environments (e.g., a personal desktop, a work laptop, a development server). While physical KVM switches offer a hardware solution, and many monitors have built-in input selectors, relying on the command line in Linux can provide a significantly faster, more flexible, and automatable way to switch between your machines.

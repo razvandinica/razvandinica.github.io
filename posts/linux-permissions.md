@@ -2,6 +2,7 @@
 title: Mastering Linux Permissions for Web Development
 date: 2025-07-21
 author: Razvan Dinica
+tags: ['Linux', 'Permissions', 'chmod', 'Security']
 ---
 
 In the world of web development, managing file and folder permissions on Linux servers is not just a best practice—it's a fundamental necessity. Incorrect permissions are a common culprit behind frustrating errors, from inaccessible files and broken scripts to critical security vulnerabilities. For web programmers, understanding and efficiently applying these commands is paramount for smooth deployments, secure operations, and debugging. Whether you're setting up a new project, deploying updates, or troubleshooting a live application, the ability to quickly and correctly adjust permissions for multiple files and directories at once can save hours of headache and prevent potential breaches.

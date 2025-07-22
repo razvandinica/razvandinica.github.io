@@ -1,6 +1,7 @@
 ---
 title: 'Create Your Own Website and Blog with This Easy-to-Use Template'
 date: '2025-07-22'
+tags: ['Next.js', 'React', 'Bootstrap', 'Template']
 ---
 
 Have you ever wanted to create your own personal website or blog but felt intimidated by the complexity? This project is designed to be the perfect starting point. It provides a modern, feature-rich foundation that is incredibly easy to customize and make your own.
