@@ -39,7 +39,7 @@ export default function Layout({ children, hideNavbar }) {
   return (
     <>
       {!hideNavbar && (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+      <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark' : 'navbar-light'} bg-light shadow-sm`}>
         <div className="container-fluid">
           <Link className="navbar-brand" href="/">Razvan Dinica</Link>
           <button className="navbar-toggler" type="button" onClick={() => setIsOpen(!isOpen)} aria-controls="navbarNav" aria-expanded={isOpen ? "true" : "false"} aria-label="Toggle navigation">
@@ -75,7 +75,7 @@ export default function Layout({ children, hideNavbar }) {
       </nav>
       )}
       <main className="container mt-4 flex-grow-1 d-flex">
-        {children}
+        <div className="w-100">{children}</div>
       </main>
       <footer className="footer mt-auto py-3 bg-light shadow-sm">
         <div className="container text-center">
