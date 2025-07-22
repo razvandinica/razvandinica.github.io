@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-export default function Layout({ children }) {
+export default function Layout({ children, hideNavbar }) {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [pageLoadTime, setPageLoadTime] = useState(0);
@@ -38,6 +38,7 @@ export default function Layout({ children }) {
 
   return (
     <>
+      {!hideNavbar && (
       <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div className="container-fluid">
           <Link className="navbar-brand" href="/">Razvan Dinica</Link>
@@ -72,12 +73,13 @@ export default function Layout({ children }) {
           </div>
         </div>
       </nav>
-      <main className="container mt-4 flex-grow-1">
+      )}
+      <main className="container mt-4 flex-grow-1 d-flex">
         {children}
       </main>
       <footer className="footer mt-auto py-3 bg-light shadow-sm">
         <div className="container text-center">
-          <span className="text-muted">© {new Date().getFullYear()} Razvan Dinica. All rights reserved.</span>
+          <span className="text-muted">© {new Date().getFullYear()}. All rights reserved.</span>
           {pageLoadTime > 0 && (
             <span className="text-muted ms-3">Page loaded in {pageLoadTime} ms.</span>
           )}
