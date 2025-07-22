@@ -16,7 +16,7 @@ export async function getStaticProps() {
     return {
       slug,
       title: matterResult.data.title,
-      date: matterResult.data.date.toISOString().substring(0, 10),
+      date: new Date(matterResult.data.date).toISOString().substring(0, 10),
     };
   });
 

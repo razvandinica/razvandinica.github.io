@@ -9,7 +9,7 @@ export default function Post({ postData }) {
   return (
     <div className="container my-4">
       <h1 className="mb-3">{postData.title}</h1>
-      <p className="text-muted">{postData.date} by {postData.author}</p>
+      <p className="text-muted">{postData.date}{postData.author && ` by ${postData.author}`}</p>
       <div dangerouslySetInnerHTML={{ __html: postData.content }} />
       <Link href="/blog" className="btn btn-primary mt-4">Back to Blog</Link>
     </div>
@@ -49,8 +49,8 @@ export async function getStaticProps({ params }) {
         slug: params.slug,
         content: contentHtml,
         title: matterResult.data.title,
-        date: matterResult.data.date.toISOString().substring(0, 10),
-        author: matterResult.data.author,
+        date: new Date(matterResult.data.date).toISOString().substring(0, 10),
+        author: matterResult.data.author || null,
       },
     },
   };
