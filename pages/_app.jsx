@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/dark-mode.css';
+import '../styles/global.css';
 import { useEffect } from 'react';
 import Layout from '../src/components/Layout';
 
