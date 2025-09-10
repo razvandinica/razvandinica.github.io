@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8" data-next-head=""/><meta name="viewport" content="width=device-width" data-next-head=""/><link rel="preload" href="/_next/static/css/3894c6f40c101bcb.css" as="style"/><link rel="stylesheet" href="/_next/static/css/3894c6f40c101bcb.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" noModule="" src="/_next/static/chunks/polyfills-42372ed130431b0a.js"></script><script src="/_next/static/chunks/webpack-8a2db148dfcc83f7.js" defer=""></script><script src="/_next/static/chunks/framework-7c95b8e5103c9e90.js" defer=""></script><script src="/_next/static/chunks/main-79696b5cb624b15e.js" defer=""></script><script src="/_next/static/chunks/pages/_app-92582addb4d51bf0.js" defer=""></script><script src="/_next/static/chunks/pages/blog/%5Bslug%5D-7744dbb806e554a7.js" defer=""></script><script src="/_next/static/MaeWniOl2LEc7oM95eU1Y/_buildManifest.js" defer=""></script><script src="/_next/static/MaeWniOl2LEc7oM95eU1Y/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="d-flex flex-column min-vh-100"><nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm"><div class="container-fluid"><a class="navbar-brand" href="/">Razvan Dinica</a><button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse " id="navbarNav"><ul class="navbar-nav ms-auto"><li class="nav-item"><button class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-fill" viewBox="0 0 16 16"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.083 1.533-.204a.78.78 0 0 1 .86-.064.454.454 0 0 1 .065.86 8.1 8.1 0 0 1-4.445 1.366C5.188 15.01 1.8 11.616 1.8 7.354c0-1.023.24-2.02.681-2.865C3.048 2.067 4.543.823 6 .278"></path></svg></button></li><li class="nav-item"><a class="nav-link" href="/aboutme">About Me</a></li><li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li><li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li></ul></div></div></nav><main class="container mt-4 flex-grow-1 d-flex"><div class="w-100"><div class="container my-4"><h1 class="mb-3">Reviving a Bricked Linksys WRT160NL Without a Serial Cable</h1><p class="text-muted">2025-09-10</p><div><p>It's a moment every hardware tinkerer dreads: the progress bar freezes, the lights stop blinking, and your device becomes an expensive paperweight. I recently faced this scenario after a failed attempt to flash OpenWRT onto my trusty Linksys WRT160NL router.</p>
+<p>Fortunately, not all is lost. Many routers have a built-in recovery mode that allows you to upload a new firmware image using a TFTP client. Based on an old, but still relevant, forum post, I was able to bring my router back to life. Here is a step-by-step guide on how you can do the same.</p>
+<p>This tutorial was performed on Ubuntu 14.04 LTS, but it should work on any modern Linux distribution with minor adjustments.</p>
+<h3>Step 1: Prepare Your Tools</h3>
+<p>First, you'll need to install a TFTP client on your Linux machine. Open a terminal and run:</p>
+<pre><code class="language-bash">sudo apt-get install tftp
+</code></pre>
+<p>Next, download the firmware you want to install. I successfully used DD-WRT's <code>linksys-to-ddwrt-firmware.bin</code>, which you can find on their <a href="http://www.dd-wrt.com/site/support/router-database">router database</a>. Alternatively, you can try the latest OpenWRT build or the official firmware from the <a href="http://support.linksys.com/en-us/support/routers/WRT160NL">Linksys support page</a>.</p>
+<h3>Step 2: Configure Your Network</h3>
+<p>This is a critical step. The router's recovery mode will only be accessible from a specific IP address.</p>
+<ol>
+<li>Disable your wireless interface.</li>
+<li>Connect an Ethernet cable from your computer to the <strong>4th LAN port</strong> on the router.</li>
+<li>Manually configure your wired <code>eth0</code> interface with the following settings:
+<ul>
+<li><strong>IP Address:</strong> <code>192.168.1.2</code></li>
+<li><strong>Netmask:</strong> <code>255.255.255.0</code></li>
+<li>Leave the Gateway and DNS fields blank.</li>
+</ul>
+</li>
+</ol>
+<h3>Step 3: The TFTP Flash</h3>
+<p>Now for the main event.</p>
+<ol>
+<li>
+<p>Open a terminal and navigate to the folder where you downloaded the firmware (e.g., <code>cd ~/Downloads</code>).</p>
+</li>
+<li>
+<p>Type the following command, but <strong>do not press Enter yet</strong>:</p>
+<pre><code class="language-bash">tftp 192.168.1.1 69
+</code></pre>
+</li>
+<li>
+<p>Power on the router. Watch for the network link light to come on, indicating your computer is connected. As soon as it does, press Enter to run the <code>tftp</code> command.</p>
+</li>
+<li>
+<p>You should now be in the TFTP prompt. Switch to binary mode to ensure the file transfers correctly:</p>
+<pre><code>binary
+</code></pre>
+</li>
+<li>
+<p>Use the <code>put</code> command to upload the firmware file:</p>
+<pre><code>put linksys-to-ddwrt-firmware.bin
+</code></pre>
+</li>
+<li>
+<p>Once the upload is complete, exit the client:</p>
+<pre><code>quit
+</code></pre>
+</li>
+</ol>
+<h3>Step 4: Victory!</h3>
+<p>The router will now flash the new firmware. Give it a few minutes to complete the process and reboot. You'll know it's working when you can successfully ping its default address:</p>
+<pre><code class="language-bash">ping 192.168.1.1
+</code></pre>
+<p>If you get a reply, you've successfully revived your router! You can now re-enable DHCP on your computer and access the router's web interface to begin configuration.</p>
+<p>A huge thank you to "fishball" from the original forum thread for providing the foundation for this guide!</p>
+</div><a class="btn btn-primary mt-4" href="/blog">Back to Blog</a></div></div></main><footer class="footer mt-auto py-3 bg-light shadow-sm"><div class="container text-center"><span class="text-muted">© <!-- -->2025<!-- -->. All rights reserved.</span></div></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postData":{"slug":"reviving-bricked-linksys-wrt160nl","content":"\u003cp\u003eIt's a moment every hardware tinkerer dreads: the progress bar freezes, the lights stop blinking, and your device becomes an expensive paperweight. I recently faced this scenario after a failed attempt to flash OpenWRT onto my trusty Linksys WRT160NL router.\u003c/p\u003e\n\u003cp\u003eFortunately, not all is lost. Many routers have a built-in recovery mode that allows you to upload a new firmware image using a TFTP client. Based on an old, but still relevant, forum post, I was able to bring my router back to life. Here is a step-by-step guide on how you can do the same.\u003c/p\u003e\n\u003cp\u003eThis tutorial was performed on Ubuntu 14.04 LTS, but it should work on any modern Linux distribution with minor adjustments.\u003c/p\u003e\n\u003ch3\u003eStep 1: Prepare Your Tools\u003c/h3\u003e\n\u003cp\u003eFirst, you'll need to install a TFTP client on your Linux machine. Open a terminal and run:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003esudo apt-get install tftp\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eNext, download the firmware you want to install. I successfully used DD-WRT's \u003ccode\u003elinksys-to-ddwrt-firmware.bin\u003c/code\u003e, which you can find on their \u003ca href=\"http://www.dd-wrt.com/site/support/router-database\"\u003erouter database\u003c/a\u003e. Alternatively, you can try the latest OpenWRT build or the official firmware from the \u003ca href=\"http://support.linksys.com/en-us/support/routers/WRT160NL\"\u003eLinksys support page\u003c/a\u003e.\u003c/p\u003e\n\u003ch3\u003eStep 2: Configure Your Network\u003c/h3\u003e\n\u003cp\u003eThis is a critical step. The router's recovery mode will only be accessible from a specific IP address.\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDisable your wireless interface.\u003c/li\u003e\n\u003cli\u003eConnect an Ethernet cable from your computer to the \u003cstrong\u003e4th LAN port\u003c/strong\u003e on the router.\u003c/li\u003e\n\u003cli\u003eManually configure your wired \u003ccode\u003eeth0\u003c/code\u003e interface with the following settings:\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eIP Address:\u003c/strong\u003e \u003ccode\u003e192.168.1.2\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eNetmask:\u003c/strong\u003e \u003ccode\u003e255.255.255.0\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003eLeave the Gateway and DNS fields blank.\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003eStep 3: The TFTP Flash\u003c/h3\u003e\n\u003cp\u003eNow for the main event.\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eOpen a terminal and navigate to the folder where you downloaded the firmware (e.g., \u003ccode\u003ecd ~/Downloads\u003c/code\u003e).\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eType the following command, but \u003cstrong\u003edo not press Enter yet\u003c/strong\u003e:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003etftp 192.168.1.1 69\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ePower on the router. Watch for the network link light to come on, indicating your computer is connected. As soon as it does, press Enter to run the \u003ccode\u003etftp\u003c/code\u003e command.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eYou should now be in the TFTP prompt. Switch to binary mode to ensure the file transfers correctly:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ebinary\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eUse the \u003ccode\u003eput\u003c/code\u003e command to upload the firmware file:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eput linksys-to-ddwrt-firmware.bin\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eOnce the upload is complete, exit the client:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003equit\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3\u003eStep 4: Victory!\u003c/h3\u003e\n\u003cp\u003eThe router will now flash the new firmware. Give it a few minutes to complete the process and reboot. You'll know it's working when you can successfully ping its default address:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eping 192.168.1.1\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eIf you get a reply, you've successfully revived your router! You can now re-enable DHCP on your computer and access the router's web interface to begin configuration.\u003c/p\u003e\n\u003cp\u003eA huge thank you to \"fishball\" from the original forum thread for providing the foundation for this guide!\u003c/p\u003e\n","title":"Reviving a Bricked Linksys WRT160NL Without a Serial Cable","date":"2025-09-10","author":null}},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"reviving-bricked-linksys-wrt160nl"},"buildId":"MaeWniOl2LEc7oM95eU1Y","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
